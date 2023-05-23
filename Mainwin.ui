@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>Form</class>
+    <widget class="QWidget" name="Form">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>700</width>
+                <height>700</height>
+            </rect>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>700</width>
+                <height>700</height>
+            </size>
+        </property>
+        <property name="maximumSize">
+            <size>
+                <width>700</width>
+                <height>700</height>
+            </size>
+        </property>
+        <property name="windowTitle">
+            <string>isEulerGraph</string>
+        </property>
+        <widget class="QPushButton" name="pushButton">
+            <property name="geometry">
+                <rect>
+                    <x>450</x>
+                    <y>270</y>
+                    <width>99</width>
+                    <height>28</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string>是欧拉图吗？</string>
+            </property>
+            <property name="iconSize">
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </widget>
+        <widget class="QLabel" name="tipsLabel">
+            <property name="geometry">
+                <rect>
+                    <x>350</x>
+                    <y>30</y>
+                    <width>291</width>
+                    <height>191</height>
+                </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">font: 75 9pt &quot;微软雅黑&quot;;</string>
+            </property>
+            <property name="text">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
+                    font-size:12pt;&quot;&gt;请在左边的文本框中按行输入&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
+                    style=&quot; font-size:12pt;&quot;&gt;一个表示图的邻接矩阵&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
+                    style=&quot; font-size:12pt;&quot;&gt;格式参考文本框内示例&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                </string>
+            </property>
+        </widget>
+        <widget class="QLabel" name="graphLabel">
+            <property name="geometry">
+                <rect>
+                    <x>30</x>
+                    <y>360</y>
+                    <width>300</width>
+                    <height>300</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string/>
+            </property>
+        </widget>
+        <widget class="QLabel" name="outputLabel">
+            <property name="geometry">
+                <rect>
+                    <x>350</x>
+                    <y>360</y>
+                    <width>300</width>
+                    <height>300</height>
+                </rect>
+            </property>
+            <property name="text">
+                <string/>
+            </property>
+        </widget>
+        <widget class="QTextEdit" name="inputtext">
+            <property name="geometry">
+                <rect>
+                    <x>30</x>
+                    <y>30</y>
+                    <width>300</width>
+                    <height>300</height>
+                </rect>
+            </property>
+        </widget>
+    </widget>
+    <tabstops>
+        <tabstop>inputtext</tabstop>
+        <tabstop>pushButton</tabstop>
+    </tabstops>
+    <resources/>
+    <connections/>
+</ui>
