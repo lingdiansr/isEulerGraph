@@ -58,9 +58,11 @@
             </property>
             <property name="text">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
-                    font-size:12pt;&quot;&gt;请在左边的文本框中按行输入&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
-                    style=&quot; font-size:12pt;&quot;&gt;一个表示图的邻接矩阵&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
-                    style=&quot; font-size:12pt;&quot;&gt;格式参考文本框内示例&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                    font-size:11pt;&quot;&gt;请在左边的文本框中按行输入&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
+                    style=&quot; font-size:11pt;&quot;&gt;一个表示图的邻接矩阵&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
+                    style=&quot; font-size:11pt;&quot;&gt;格式要求：矩阵元素以英文逗号分割，&lt;/span&gt;&lt;/p&gt;&lt;p
+                    align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;每行行末标记英文逗号&lt;/span&gt;&lt;/p&gt;&lt;p
+                    align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;最后一行不写逗号&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
                 </string>
             </property>
         </widget>

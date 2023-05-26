@@ -40,7 +40,7 @@ class Ui_Form(object):
         self.tipsLabel.setGeometry(QtCore.QRect(350, 30, 291, 191))
         self.tipsLabel.setStyleSheet("font: 75 9pt \"微软雅黑\";")
         self.tipsLabel.setObjectName("tipsLabel")
-        self.graphCanvas = FigureCanvas(Figure(figsize=(3, 3)))
+        self.graphCanvas = FigureCanvas(Figure(figsize=(4, 4)))
         self.graphCanvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.graphCanvas.updateGeometry()
         self.graphCanvas.setParent(Form)
@@ -52,6 +52,7 @@ class Ui_Form(object):
         self.inputtext = QtWidgets.QTextEdit(Form)
         self.inputtext.setGeometry(QtCore.QRect(30, 30, 300, 300))
         self.inputtext.setObjectName("inputtext")
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.inputtext, self.pushButton)
@@ -60,9 +61,11 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "isEulerGraph"))
         self.pushButton.setText(_translate("Form", "是欧拉图吗？"))
-        self.tipsLabel.setText(_translate("Form",
-                                          "<html><head/><body><p align=\"center\"><span style=\"\n"
-                                          "                    font-size:12pt;\">请在左边的文本框中按行输入</span></p><p align=\"center\"><span\n"
-                                          "                    style=\" font-size:12pt;\">一个表示图的邻接矩阵</span></p><p align=\"center\"><span\n"
-                                          "                    style=\" font-size:12pt;\">格式参考文本框内示例</span></p></body></html>\n"
-                                          "                "))
+        self.tipsLabel.setText(_translate("Form", "<html><head/><body><p align=\"center\"><span style=\" "
+                                                  "font-size:11pt;\">请在左边的文本框中按行输入</span></p><p "
+                                                  "align=\"center\"><span style=\" "
+                                                  "font-size:11pt;\">一个表示图的邻接矩阵</span></p><p align=\"center\"><span "
+                                                  "style=\" font-size:11pt;\">格式要求：矩阵元素以英文逗号分割，</span></p><p "
+                                                  "align=\"center\"><span style=\" "
+                                                  "font-size:11pt;\">每行行末标记英文逗号</span></p><p align=\"center\"><span "
+                                                  "style=\" font-size:11pt;\">最后一行不写逗号</span></p></body></html>"))
