@@ -9,6 +9,9 @@ from matplotlib.figure import Figure
 
 
 class Ui_Form(object):
+    def __init__(self):
+        self.centralwidget = None
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(700, 700)
@@ -68,6 +71,10 @@ class Example(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
 
+        # 添加下面两行代码
+        self.ui.graphCanvasParent = QWidget(self.ui.centralwidget)
+        self.ui.graphCanvasParent.setGeometry(QtCore.QRect(20, 100, 280, 280))
+
         self.ui.pushButton.clicked.connect(self.plotGraph)
 
         self.show()
@@ -91,14 +98,11 @@ class Example(QWidget):
                 if G[i, j] == 1:
                     ax.plot([pos[i, 0], pos[j, 0]], [pos[i, 1], pos[j, 1]], 'k-', zorder=1)
 
+        self.ui.graphCanvasParent = QtWidgets.QWidget(self.ui.centralwidget)
+        self.ui.graphCanvasParent.setGeometry(QtCore.QRect(30, 360, 300, 300))
         self.ui.graphCanvas = FigureCanvas(fig)
         self.ui.graphCanvas.setParent(self.ui.graphCanvasParent)
         self.ui.graphCanvas.show()
-
-        try:
-            self.ui.graphCanvas.draw()
-        except Exception as e:
-            print(e)
 
 
 if __name__ == '__main__':
