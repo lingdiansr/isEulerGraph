@@ -40,7 +40,7 @@ class Ui_Form(object):
         self.tipsLabel.setGeometry(QtCore.QRect(350, 30, 291, 191))
         self.tipsLabel.setStyleSheet("font: 75 9pt \"微软雅黑\";")
         self.tipsLabel.setObjectName("tipsLabel")
-        self.graphCanvas = FigureCanvas(Figure(figsize=(4, 4)))
+        self.graphCanvas = FigureCanvas(Figure(figsize=(3, 3)))
         self.graphCanvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.graphCanvas.updateGeometry()
         self.graphCanvas.setParent(Form)

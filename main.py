@@ -33,7 +33,7 @@ class Ui_Form(object):
         self.tipsLabel.setGeometry(QtCore.QRect(350, 30, 291, 191))
         self.tipsLabel.setStyleSheet("font: 75 9pt \"微软雅黑\";")
         self.tipsLabel.setObjectName("tipsLabel")
-        self.graphCanvas = FigureCanvas(Figure(figsize=(4, 4)))
+        self.graphCanvas = FigureCanvas(Figure(figsize=(3, 3)))
         self.graphCanvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.graphCanvas.updateGeometry()
         self.graphCanvas.setParent(Form)
@@ -83,14 +83,14 @@ class Example(QWidget):
     def plotGraph(self):
         # 示例绘制一个五个节点的无向图
         G = nx.Graph()
-        edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4), (4, 5)]
+        edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4), (4, 5), (0, 2)]
         G.add_edges_from(edges)
-        fig = Figure(figsize=(4, 4))
+        fig = Figure(figsize=(3, 3))
         ax = fig.add_subplot(111)
         ax.axis('off')
         ax.set_aspect('equal')
         pos = nx.spring_layout(G, seed=42)  # 使用spring layout布局，seed保证每次绘制结果一致
-        nx.draw_networkx_nodes(G, pos, node_size=300, node_color='w', edgecolors='k', ax=ax)
+        nx.draw_networkx_nodes(G, pos, node_size=100, node_color='w', edgecolors='k', ax=ax)
         nx.draw_networkx_edges(G, pos, width=1, ax=ax)
         self.ui.graphCanvas.setGeometry(QtCore.QRect(30, 360, 300, 300))
         self.ui.graphCanvas.figure = fig
@@ -106,43 +106,3 @@ if __name__ == '__main__':
     sys.exit(app.exec_())
 
 
-class Example(QWidget):
-
-    def __init__(self):
-        super().__init__()
-        self.ui = None
-        self.initUI()
-
-    def initUI(self):
-        self.setGeometry(300, 300, 700, 700)
-        self.setWindowTitle('isEulerGraph')
-        self.setWindowIcon(QIcon('icon.png'))
-        self.ui = Ui_Form()
-        self.ui.setupUi(self)
-        self.ui.pushButton.clicked.connect(self.plotGraph)
-        self.show()
-
-    def plotGraph(self):
-        # 示例绘制一个五个节点的无向图
-        G = nx.Graph()
-        edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4), (4, 5)]
-        G.add_edges_from(edges)
-        fig = Figure(figsize=(4, 4))
-        ax = fig.add_subplot(111)
-        ax.axis('off')
-        ax.set_aspect('equal')
-        pos = nx.spring_layout(G, seed=42)  # 使用spring layout布局，seed保证每次绘制结果一致
-        nx.draw_networkx_nodes(G, pos, node_size=300, node_color='w', edgecolors='k', ax=ax)
-        nx.draw_networkx_edges(G, pos, width=1, ax=ax)
-        self.ui.graphCanvas.setGeometry(QtCore.QRect(30, 360, 300, 300))
-        self.ui.graphCanvas.figure = fig
-        self.ui.graphCanvas.draw()
-
-    def getGraph(self):
-        G = nx.Graph()
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
