@@ -9,15 +9,30 @@
 
 
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QSizePolicy
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
 
 
 class Ui_Form(object):
+
+    def __init__(self):
+        self.inputtext = None
+        self.outputLabel = None
+        self.graphCanvas = None
+        self.tipsLabel = None
+        self.pushButton = None
+        self.centralwidget = None
+
+    def init(self):
+        self.centralwidget = None
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(700, 700)
-        Form.setMinimumSize(QtCore.QSize(700, 700))
-        Form.setMaximumSize(QtCore.QSize(700, 700))
-        self.pushButton = QtWidgets.QPushButton(Form)
+        Form.setMinimumSize(700, 700)
+        Form.setMaximumSize(700, 700)
+        self.pushButton = QtWidgets.QPushButton(Form, text="是欧拉图吗？")
         self.pushButton.setGeometry(QtCore.QRect(450, 270, 99, 28))
         self.pushButton.setIconSize(QtCore.QSize(20, 20))
         self.pushButton.setObjectName("pushButton")
@@ -25,10 +40,11 @@ class Ui_Form(object):
         self.tipsLabel.setGeometry(QtCore.QRect(350, 30, 291, 191))
         self.tipsLabel.setStyleSheet("font: 75 9pt \"微软雅黑\";")
         self.tipsLabel.setObjectName("tipsLabel")
-        self.graphLabel = QtWidgets.QLabel(Form)
-        self.graphLabel.setGeometry(QtCore.QRect(30, 360, 300, 300))
-        self.graphLabel.setText("")
-        self.graphLabel.setObjectName("graphLabel")
+        self.graphCanvas = FigureCanvas(Figure(figsize=(3, 3)))
+        self.graphCanvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.graphCanvas.updateGeometry()
+        self.graphCanvas.setParent(Form)
+        self.graphCanvas.move(30, 360)
         self.outputLabel = QtWidgets.QLabel(Form)
         self.outputLabel.setGeometry(QtCore.QRect(350, 360, 300, 300))
         self.outputLabel.setText("")
@@ -36,7 +52,6 @@ class Ui_Form(object):
         self.inputtext = QtWidgets.QTextEdit(Form)
         self.inputtext.setGeometry(QtCore.QRect(30, 30, 300, 300))
         self.inputtext.setObjectName("inputtext")
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.inputtext, self.pushButton)
@@ -45,8 +60,9 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "isEulerGraph"))
         self.pushButton.setText(_translate("Form", "是欧拉图吗？"))
-        self.tipsLabel.setText(_translate("Form", "<html><head/><body><p align=\"center\"><span style=\"\n"
-                                                  "                    font-size:12pt;\">请在左边的文本框中按行输入</span></p><p align=\"center\"><span\n"
-                                                  "                    style=\" font-size:12pt;\">一个表示图的邻接矩阵</span></p><p align=\"center\"><span\n"
-                                                  "                    style=\" font-size:12pt;\">格式参考文本框内示例</span></p></body></html>\n"
-                                                  "                "))
+        self.tipsLabel.setText(_translate("Form",
+                                          "<html><head/><body><p align=\"center\"><span style=\"\n"
+                                          "                    font-size:12pt;\">请在左边的文本框中按行输入</span></p><p align=\"center\"><span\n"
+                                          "                    style=\" font-size:12pt;\">一个表示图的邻接矩阵</span></p><p align=\"center\"><span\n"
+                                          "                    style=\" font-size:12pt;\">格式参考文本框内示例</span></p></body></html>\n"
+                                          "                "))
