@@ -1,6 +1,7 @@
 import sys
 
 import networkx as nx
+import numpy as np
 # from Mainwin import Ui_Form
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import QIcon
@@ -80,16 +81,21 @@ class Example(QWidget):
         self.ui.pushButton.clicked.connect(self.plotGraph)
         self.show()
 
+    type = ""
+
     def plotGraph(self):
+        self.ui.graphCanvas.figure.clear()
         # 示例绘制一个五个节点的无向图
         G = nx.Graph()
-        edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4), (4, 5), (0, 2)]
-        G.add_edges_from(edges)
+        G = self.getGraph()
+        # edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4), (4, 5), (0, 2)]
+        # G.add_edges_from(edges)
         fig = Figure(figsize=(3, 3))
         ax = fig.add_subplot(111)
         ax.axis('off')
         ax.set_aspect('equal')
         pos = nx.spring_layout(G, seed=42)  # 使用spring layout布局，seed保证每次绘制结果一致
+
         nx.draw_networkx_nodes(G, pos, node_size=100, node_color='w', edgecolors='k', ax=ax)
         nx.draw_networkx_edges(G, pos, width=1, ax=ax)
         self.ui.graphCanvas.setGeometry(QtCore.QRect(30, 360, 300, 300))
@@ -98,6 +104,18 @@ class Example(QWidget):
 
     def getGraph(self):
         G = nx.Graph()
+        matrix = np.matrix(self.ui.inputtext.toPlainText())
+        # print(G)
+        h, w = matrix.shape
+        for i in range(h):
+            for j in range(w):
+                G.add_edge(i, j)
+
+        if (matrix == matrix.T).all():
+            self.type = "Undirected"
+        else:
+            self.type = "Directed"
+        return G
 
 
 if __name__ == '__main__':
@@ -105,4 +123,8 @@ if __name__ == '__main__':
     ex = Example()
     sys.exit(app.exec_())
 
-
+"""
+0,1,1;
+1,0,1;
+1,1,0
+"""
