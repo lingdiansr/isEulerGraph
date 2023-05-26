@@ -70,6 +70,7 @@ class Example(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = None
+        self.axes = None  # 保存绘图区域
         self.initUI()
 
     def initUI(self):
@@ -84,7 +85,8 @@ class Example(QWidget):
     type = ""
 
     def plotGraph(self):
-        self.ui.graphCanvas.figure.clear()
+        self.ui.graphCanvas.figure.clear()  # 清空绘图区域
+
         # 示例绘制一个五个节点的无向图
         G = nx.Graph()
         G = self.getGraph()
@@ -95,7 +97,6 @@ class Example(QWidget):
         ax.axis('off')
         ax.set_aspect('equal')
         pos = nx.spring_layout(G, seed=42)  # 使用spring layout布局，seed保证每次绘制结果一致
-
         nx.draw_networkx_nodes(G, pos, node_size=100, node_color='w', edgecolors='k', ax=ax)
         nx.draw_networkx_edges(G, pos, width=1, ax=ax)
         self.ui.graphCanvas.setGeometry(QtCore.QRect(30, 360, 300, 300))
@@ -106,11 +107,12 @@ class Example(QWidget):
         G = nx.Graph()
         matrix = np.matrix(self.ui.inputtext.toPlainText())
         # print(G)
-        h, w = matrix.shape
+        """h, w = matrix.shape
         for i in range(h):
             for j in range(w):
-                G.add_edge(i, j)
-
+                if matrix[i][j] == 1:
+                    G.add_edge(i, j)"""
+        G = nx.from_numpy_array(matrix)
         if (matrix == matrix.T).all():
             self.type = "Undirected"
         else:
