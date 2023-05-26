@@ -1,6 +1,6 @@
 import sys
 
-import numpy as np
+import networkx as nx
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QSizePolicy
@@ -9,15 +9,24 @@ from matplotlib.figure import Figure
 
 
 class Ui_Form(object):
+
     def __init__(self):
+        self.inputtext = None
+        self.outputLabel = None
+        self.graphCanvas = None
+        self.tipsLabel = None
+        self.pushButton = None
+        self.centralwidget = None
+
+    def init(self):
         self.centralwidget = None
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(700, 700)
-        Form.setMinimumSize(700, 700)  # 修改代码
-        Form.setMaximumSize(700, 700)  # 修改代码
-        self.pushButton = QtWidgets.QPushButton(Form)
+        Form.setMinimumSize(700, 700)
+        Form.setMaximumSize(700, 700)
+        self.pushButton = QtWidgets.QPushButton(Form, text="是欧拉图吗？")
         self.pushButton.setGeometry(QtCore.QRect(450, 270, 99, 28))
         self.pushButton.setIconSize(QtCore.QSize(20, 20))
         self.pushButton.setObjectName("pushButton")
@@ -26,8 +35,8 @@ class Ui_Form(object):
         self.tipsLabel.setStyleSheet("font: 75 9pt \"微软雅黑\";")
         self.tipsLabel.setObjectName("tipsLabel")
         self.graphCanvas = FigureCanvas(Figure(figsize=(3, 3)))
-        self.graphCanvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)  # 修改代码
-        self.graphCanvas.updateGeometry()  # 修改代码
+        self.graphCanvas.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.graphCanvas.updateGeometry()
         self.graphCanvas.setParent(Form)
         self.graphCanvas.move(30, 360)
         self.outputLabel = QtWidgets.QLabel(Form)
@@ -37,7 +46,6 @@ class Ui_Form(object):
         self.inputtext = QtWidgets.QTextEdit(Form)
         self.inputtext.setGeometry(QtCore.QRect(30, 30, 300, 300))
         self.inputtext.setObjectName("inputtext")
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         Form.setTabOrder(self.inputtext, self.pushButton)
@@ -58,51 +66,33 @@ class Example(QWidget):
 
     def __init__(self):
         super().__init__()
-
         self.ui = None
         self.initUI()
 
     def initUI(self):
-
         self.setGeometry(300, 300, 700, 700)
         self.setWindowTitle('isEulerGraph')
         self.setWindowIcon(QIcon('icon.png'))
-
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-
-        # 添加下面两行代码
-        self.ui.graphCanvasParent = QWidget(self.ui.centralwidget)
-        self.ui.graphCanvasParent.setGeometry(QtCore.QRect(20, 100, 280, 280))
-
         self.ui.pushButton.clicked.connect(self.plotGraph)
-
         self.show()
 
     def plotGraph(self):
         # 示例绘制一个五个节点的无向图
-        G = np.array([[0, 1, 0, 0, 1],
-                      [1, 0, 1, 0, 0],
-                      [0, 1, 0, 1, 0],
-                      [0, 0, 1, 0, 1],
-                      [1, 0, 0, 1, 0]])
-
+        G = nx.Graph()
+        edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4)]
+        G.add_edges_from(edges)
         fig = Figure(figsize=(3, 3))
         ax = fig.add_subplot(111)
         ax.axis('off')
         ax.set_aspect('equal')
-        pos = np.array([[0, 0], [-1, 1], [1, 1], [-1, -1], [1, -1]])
-        ax.scatter(pos[:, 0], pos[:, 1], s=300, c='w', edgecolors='k', zorder=2)
-        for i in range(5):
-            for j in range(i + 1, 5):
-                if G[i, j] == 1:
-                    ax.plot([pos[i, 0], pos[j, 0]], [pos[i, 1], pos[j, 1]], 'k-', zorder=1)
-
-        self.ui.graphCanvasParent = QtWidgets.QWidget(self.ui.centralwidget)
-        self.ui.graphCanvasParent.setGeometry(QtCore.QRect(30, 360, 300, 300))
-        self.ui.graphCanvas = FigureCanvas(fig)
-        self.ui.graphCanvas.setParent(self.ui.graphCanvasParent)
-        self.ui.graphCanvas.show()
+        pos = nx.spring_layout(G, seed=42)  # 使用spring layout布局，seed保证每次绘制结果一致
+        nx.draw_networkx_nodes(G, pos, node_size=300, node_color='w', edgecolors='k', ax=ax)
+        nx.draw_networkx_edges(G, pos, width=1, ax=ax)
+        self.ui.graphCanvas.setGeometry(QtCore.QRect(30, 360, 300, 300))
+        self.ui.graphCanvas.figure = fig
+        self.ui.graphCanvas.draw()
 
 
 if __name__ == '__main__':
