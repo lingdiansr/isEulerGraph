@@ -63,6 +63,25 @@ class Ui_Form(object):
                                                   "align=\"center\"><span style=\" "
                                                   "font-size:11pt;\">每行行末标记英文逗号</span></p><p align=\"center\"><span "
                                                   "style=\" font-size:11pt;\">最后一行不写逗号</span></p></body></html>"))
+        self.inputtext.setHtml(_translate("Form",
+                                          "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "
+                                          "\"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+                                          "<html><head><meta name=\"qrichtext\" content=\"1\" /><style "
+                                          "type=\"text/css\">\n"
+                                          "p, li { white-space: pre-wrap; }\n"
+                                          "</style></head><body style=\" font-family:\'SimSun\'; font-size:9pt; "
+                                          "font-weight:400; font-style:normal;\">\n"
+                                          "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+                                          "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0,1,0,0,0;</p>\n"
+                                          "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+                                          "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0,0,1,0,0;</p>\n"
+                                          "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+                                          "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0,0,0,1,0;</p>\n"
+                                          "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+                                          "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0,0,0,0,1;</p>\n"
+                                          "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; "
+                                          "margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1,0,0,0,"
+                                          "0</p></body></html>"))
 
 
 class Example(QWidget):
@@ -86,37 +105,33 @@ class Example(QWidget):
 
     def plotGraph(self):
         self.ui.graphCanvas.figure.clear()  # 清空绘图区域
-
-        # 示例绘制一个五个节点的无向图
-        G = nx.Graph()
+        if self.type == "Undirected":
+            G = nx.Graph()
+        elif self.type == "Directed":
+            G = nx.DiGraph()
         G = self.getGraph()
-        # edges = [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4), (4, 5), (0, 2)]
-        # G.add_edges_from(edges)
         fig = Figure(figsize=(3, 3))
         ax = fig.add_subplot(111)
         ax.axis('off')
         ax.set_aspect('equal')
         pos = nx.spring_layout(G, seed=42)  # 使用spring layout布局，seed保证每次绘制结果一致
         nx.draw_networkx_nodes(G, pos, node_size=100, node_color='w', edgecolors='k', ax=ax)
-        nx.draw_networkx_edges(G, pos, width=1, ax=ax)
+        if self.type == "Undirected":
+            nx.draw_networkx_edges(G, pos, width=1, ax=ax)
+        elif self.type == "Directed":
+            nx.draw_networkx_edges(G, pos, width=1, arrows=True, arrowstyle='->', arrowsize=5, ax=ax)
         self.ui.graphCanvas.setGeometry(QtCore.QRect(30, 360, 300, 300))
         self.ui.graphCanvas.figure = fig
         self.ui.graphCanvas.draw()
 
     def getGraph(self):
-        G = nx.Graph()
         matrix = np.matrix(self.ui.inputtext.toPlainText())
-        # print(G)
-        """h, w = matrix.shape
-        for i in range(h):
-            for j in range(w):
-                if matrix[i][j] == 1:
-                    G.add_edge(i, j)"""
-        G = nx.from_numpy_array(matrix)
         if (matrix == matrix.T).all():
             self.type = "Undirected"
+            G = nx.Graph(matrix)
         else:
             self.type = "Directed"
+            G = nx.DiGraph(matrix)
         return G
 
 
