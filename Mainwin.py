@@ -73,7 +73,7 @@ class Ui_Form(object):
                                                   "一个表示图的邻接矩阵\n"
                                                   "格式要求：矩阵元素以英文逗号分割\n"
                                                   "每行行末标记英文逗号\n"
-                                                  "最后一行不写逗号 "))
+                                                  "最后一行不写分号 "))
         self.outputLabel.setText(_translate("Form", "<html><head/><body><p align=\"center\"><br/></p></body></html>"))
         self.inputtext.setHtml(_translate("Form",
                                           "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" "

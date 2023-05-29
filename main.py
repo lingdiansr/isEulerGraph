@@ -54,6 +54,8 @@ class Main(QWidget):
                 self.G.out_degree(n) == self.G.in_degree(n) for n in self.G) and nx.is_strongly_connected(self.G)
 
     def plotGraph(self):
+        if self.G is None:
+            return
         self.ui.graphCanvas.figure.clear()  # 清空绘图区域
         fig = Figure(figsize=(3, 3))
         ax = fig.add_subplot(111)
@@ -70,6 +72,8 @@ class Main(QWidget):
         self.ui.graphCanvas.draw()
 
     def outJudge(self):
+        if self.G is None:
+            return
         outString = "您输入的"
         if self.graphType == "Undirected":
             outString = outString + "无向图"
