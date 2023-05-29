@@ -39,19 +39,19 @@ class Main(QWidget):
         while True:
             try:
                 matrix = np.matrix(self.ui.inputtext.toPlainText())
-                break
+                if (matrix == matrix.T).all():
+                    self.graphType = "Undirected"
+                    self.G = nx.Graph(matrix)
+                    self.judgeEuler = all(d % 2 == 0 for v, d in self.G.degree()) and nx.is_connected(self.G)
+                else:
+                    self.graphType = "Directed"
+                    self.G = nx.DiGraph(matrix)
+                    self.judgeEuler = all(
+                        self.G.out_degree(n) == self.G.in_degree(n) for n in self.G) and nx.is_strongly_connected(
+                        self.G)
             except:
                 QtWidgets.QMessageBox.warning(self, "错误", "输入格式错误，请按照要求重新输入！")
                 return
-        if (matrix == matrix.T).all():
-            self.graphType = "Undirected"
-            self.G = nx.Graph(matrix)
-            self.judgeEuler = all(d % 2 == 0 for v, d in self.G.degree()) and nx.is_connected(self.G)
-        else:
-            self.graphType = "Directed"
-            self.G = nx.DiGraph(matrix)
-            self.judgeEuler = all(
-                self.G.out_degree(n) == self.G.in_degree(n) for n in self.G) and nx.is_strongly_connected(self.G)
 
     def plotGraph(self):
         if self.G is None:
