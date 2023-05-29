@@ -37,3 +37,9 @@
 完全解压onlyEXE.zip后双击main.exe运行即可
 
 ### 3.3 运行效果截图
+
+![](pic/01.png)
+![](pic/02.png)
+![](pic/03.png)
+![](pic/04.png)
+![](pic/05.png)
