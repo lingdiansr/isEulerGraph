@@ -28,11 +28,14 @@
         <widget class="QPushButton" name="pushButton">
             <property name="geometry">
                 <rect>
-                    <x>450</x>
-                    <y>270</y>
-                    <width>99</width>
-                    <height>28</height>
+                    <x>420</x>
+                    <y>250</y>
+                    <width>151</width>
+                    <height>51</height>
                 </rect>
+            </property>
+            <property name="styleSheet">
+                <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
             </property>
             <property name="text">
                 <string>是欧拉图吗？</string>
@@ -42,6 +45,9 @@
                     <width>20</width>
                     <height>20</height>
                 </size>
+            </property>
+            <property name="checkable">
+                <bool>false</bool>
             </property>
         </widget>
         <widget class="QLabel" name="tipsLabel">
@@ -53,17 +59,28 @@
                     <height>191</height>
                 </rect>
             </property>
+            <property name="font">
+                <font>
+                    <family>微软雅黑</family>
+                    <pointsize>11</pointsize>
+                    <weight>9</weight>
+                    <italic>false</italic>
+                    <bold>false</bold>
+                </font>
+            </property>
             <property name="styleSheet">
-                <string notr="true">font: 75 9pt &quot;微软雅黑&quot;;</string>
+                <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
             </property>
             <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot;
-                    font-size:11pt;&quot;&gt;请在左边的文本框中按行输入&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
-                    style=&quot; font-size:11pt;&quot;&gt;一个表示图的邻接矩阵&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span
-                    style=&quot; font-size:11pt;&quot;&gt;格式要求：矩阵元素以英文逗号分割，&lt;/span&gt;&lt;/p&gt;&lt;p
-                    align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;每行行末标记英文逗号&lt;/span&gt;&lt;/p&gt;&lt;p
-                    align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;最后一行不写逗号&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+                <string>请在左边的文本框中按行输入
+                    一个表示图的邻接矩阵
+                    格式要求：矩阵元素以英文逗号分割
+                    每行行末标记英文逗号
+                    最后一行不写逗号
                 </string>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignCenter</set>
             </property>
         </widget>
         <widget class="QLabel" name="graphLabel">
@@ -88,8 +105,14 @@
                     <height>300</height>
                 </rect>
             </property>
+            <property name="styleSheet">
+                <string notr="true">font: 75 11pt &quot;微软雅黑&quot;;</string>
+            </property>
             <property name="text">
-                <string/>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="alignment">
+                <set>Qt::AlignCenter</set>
             </property>
         </widget>
         <widget class="QTextEdit" name="inputtext">
