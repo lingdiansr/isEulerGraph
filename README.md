@@ -35,7 +35,7 @@
 
 ### 3.2 运行方法说明
 
-完全解压[onlyEXE.zip]https://github.com/lingdiansr/isEulerGraph/releases/tag/lingdianshiren 后双击main.exe运行即可
+完全解压 [onlyEXE.zip](https://github.com/lingdiansr/isEulerGraph/releases/tag/lingdianshiren) 后双击main.exe运行即可
 
 ### 3.3 运行效果截图
 
